@@ -1,0 +1,1 @@
+export const default_referer = "https://punchy.ikindness.cn/";

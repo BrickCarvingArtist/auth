@@ -13,10 +13,6 @@ import {parse} from "querystring";
 }, dispatch))
 @connect()
 export default class Reset extends Component{
-	constructor(props){
-		super(props);
-		this.props.setTitle("修改密码");
-	}
 	render(){
 		const {
 			dispatch,

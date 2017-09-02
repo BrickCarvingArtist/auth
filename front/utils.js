@@ -1,10 +1,14 @@
 import React from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
-export const RouteWithSubRoutes = (route) => <Route path={route.path} exact={route.exact} strict={route.strict} render={
-	props => (
-		<route.component {...props} routes={route.routes} fetchData={route.fetchData} />
-	)
-} />;
+import {setTitle} from "./actions";
+export const RouteWithSubRoutes = route => (
+	<Route path={route.path} exact={route.exact} strict={route.strict} render={
+		props => (
+			route.dispatch(setTitle(route.title)),
+			<route.component {...props} routes={route.routes} fetchData={route.fetchData} />
+		)
+	} />
+);
 export const qs = {
 	parse(query){
 		let queries = {};

@@ -10,10 +10,6 @@ import {qs} from "../utils";
 }), dispatch => bindActionCreators({setTitle}, dispatch))
 @connect()
 export default class Behavior extends Component{
-	constructor(props){
-		super(props);
-		this.props.setTitle("行为校验");
-	}
 	async fetch(){
 		const {
 			dispatch,

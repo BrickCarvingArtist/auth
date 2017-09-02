@@ -1,5 +1,6 @@
 import fetch from "isomorphic-fetch";
 import {stringify} from "querystring";
+import {default_referer} from "../configs";
 export const setUserByToken = value => (async () => {
 	try{
 		const {
@@ -9,18 +10,18 @@ export const setUserByToken = value => (async () => {
 		} = await (await fetch(`https://auth.ikindness.cn/api/verify?sso_token=${value}`)).json();
 		if(code){
 			return {
-				type: "dialog_message",
+				type: "DIALOG_MESSAGE",
 				value: message
 			};
 		}
 		return {
-			type: "user",
+			type: "USER",
 			value: data,
 			ok: 1
 		};
 	}catch(e){
 		return {
-			type: "dialog_message",
+			type: "DIALOG_MESSAGE",
 			value: "网络异常"
 		};
 	}
@@ -34,18 +35,18 @@ export const getBehavior = value => (async () => {
 		} = await (await fetch(`https://auth.ikindness.cn/api/behavior?user=${value}`)).json();
 		if(code){
 			return {
-				type: "dialog_message",
+				type: "DIALOG_MESSAGE",
 				value: message
 			};
 		}
 		return {
-			type: "behavior",
+			type: "BEHAVIOR",
 			value: data,
 			ok: 1
 		};
 	}catch(e){
 		return {
-			type: "dialog_message",
+			type: "DIALOG_MESSAGE",
 			value: "网络异常"
 		};
 	}
@@ -59,18 +60,18 @@ export const match = (user, articleId) => (async () => {
 		} = await (await fetch(`https://auth.ikindness.cn/api/match?user=${user}&article_id=${articleId}`)).json();
 		if(code){
 			return {
-				type: "dialog_message",
+				type: "DIALOG_MESSAGE",
 				value: message
 			};
 		}
 		return {
-			type: "matched_user",
+			type: "MATCHED_USER",
 			value: data,
 			ok: 1
 		};
 	}catch(e){
 		return {
-			type: "dialog_message",
+			type: "DIALOG_MESSAGE",
 			value: "网络异常"
 		};
 	}
@@ -91,18 +92,18 @@ export const reset = (user, password, sso_token, referer = default_referer) => (
 		})).json();
 		if(code){
 			return {
-				type: "dialog_message",
+				type: "DIALOG_MESSAGE",
 				value: message
 			};
 		}
 		return {
-			type: "reset",
+			type: "RESET",
 			value: data,
 			ok: 1
 		};
 	}catch(e){
 		return {
-			type: "dialog_message",
+			type: "DIALOG_MESSAGE",
 			value: "网络异常"
 		};
 	}

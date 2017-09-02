@@ -1,5 +1,6 @@
 import fetch from "isomorphic-fetch";
 import {stringify} from "querystring";
+import {default_referer} from "../configs";
 export const signIn = (user, password, referer = default_referer) => (async () => {
 	try{
 		const {
@@ -15,18 +16,18 @@ export const signIn = (user, password, referer = default_referer) => (async () =
 		})).json();
 		if(code){
 			return {
-				type: "dialog_message",
+				type: "DIALOG_MESSAGE",
 				value: message
 			};
 		}
 		return {
-			type: "signed_in",
+			type: "SIGNED_IN",
 			value: data,
 			ok: 1
 		};
 	}catch(e){
 		return {
-			type: "dialog_message",
+			type: "DIALOG_MESSAGE",
 			value: "网络异常"
 		};
 	}

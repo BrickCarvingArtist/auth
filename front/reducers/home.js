@@ -1,19 +1,19 @@
 export default (state = {
 	behavior: []
 }, {type, value}) => ({
-	user: {
+	USER: {
 		...state,
 		user: value
 	},
-	sign_type: {
+	SIGN_TYPE: {
 		...state,
 		signType: value
 	},
-	behavior: {
+	BEHAVIOR: {
 		...state,
 		behavior: value
 	},
-	matched_user: {
+	MATCHED_USER: {
 		...state,
 		sso_token: value
 	}

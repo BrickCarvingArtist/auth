@@ -1,16 +1,10 @@
-export default (state = {}, {type, value}) => {
-	switch(type){
-		case "page_title":
-			return {
-				...state,
-				title: value
-			};
-		case "dialog_message":
-			return {
-				...state,
-				message: value
-			};
-		default:
-			return state;
+export default (state = {}, {type, value}) => ({
+	PAGE_TITLE: (process.title === "node" || (document.title = value), {
+		...state,
+		title: value
+	}),
+	DIALOG_MESSAGE: {
+		...state,
+		message: value
 	}
-};
+}[type]) || state;

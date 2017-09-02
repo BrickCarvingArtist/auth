@@ -14,17 +14,6 @@ import {parse} from "querystring";
 }, dispatch))
 @connect()
 export default class Distributor extends Component{
-	constructor(props){
-		super(props);
-		const {
-			setTitle,
-			signType
-		} = this.props;
-		setTitle(`${this.getSignName(signType)} | Punchy`);
-	}
-	getSignName(signType){
-		return ["注册", "登录"][signType];
-	}
 	render(){
 		const {
 			dispatch,
@@ -60,7 +49,7 @@ export default class Distributor extends Component{
 						ok && (location.href = value);
 					}
 				}>{
-					this.getSignName(signType)
+					["注册", "登录"][signType]
 				}</button>
 			</form>
 		);

@@ -15,18 +15,18 @@ export const signUp = (user, password) => (async () => {
 		})).json();
 		if(code){
 			return {
-				type: "dialog_message",
+				type: "DIALOG_MESSAGE",
 				value: message
 			};
 		}
 		return {
-			type: "signed_up",
+			type: "SIGNED_IN",
 			value: data,
 			ok: 1
 		};
 	}catch(e){
 		return {
-			type: "dialog_message",
+			type: "DIALOG_MESSAGE",
 			value: "网络异常"
 		};
 	}

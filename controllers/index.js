@@ -17,9 +17,9 @@ export default async app => {
 		.use(page())
 		.listen(SERVER.port)
 		.on("error", e => {
-			ctx.body = error(5009999999, {
+			error(5009999999, {
 				e
-			})
+			});
 		});
 	console.log(`Server started on port ${SERVER.port}.`);
 };
