@@ -1,0 +1,66 @@
+@import "./reset"
+@import "./icon"
+@import "./mixin"
+body
+	background-color #f3f3f3
+form
+	display flex
+	flex-direction column
+	align-items center
+	> label
+		line-height (5000vh/667)
+		font-size (1600vh/667)
+		color #666
+	&.sign_in
+		padding-top 60vw
+		bg("/404.jpg")
+		background-repeat no-repeat
+		background-position 50% (2000vh/667)
+	&.behavior
+		padding 0 (2000vw/375)
+		section
+			padding (1000vh/667) 0
+			line-height (2200vh/667)
+			font-size (1400vh/667)
+			&:not(:last-of-type)
+				border-bottom 1px solid #e3e3e3
+fieldset
+	padding 0 (2000vw/375)
+	width 100%
+	border-width 1px 0
+	border-color #e3e3e3;
+input
+	&[type="tel"]
+	&[type="password"]
+		height (5000vh/667)
+		font-size (1500vh/667)
+		letter-spacing (100vw/375)
+	&.full
+		width 100%
+		&:not(:last-of-type)
+			border-bottom-color #e3e3e3
+	&.half
+		width (16000vw/375)
+	&.invalid
+		border-bottom-color #f00
+button
+	font-size (1500vh/667)
+	&.full
+		width (33500vw/375)
+		height (4000vh/667)
+	&.below_input
+		margin-top (2000vh/667)
+button
+.anchor
+	&.bottom
+		position fixed
+		bottom 0
+		width 100vw
+		height (4000vh/667)
+		border-radius 0
+		text-align center
+		line-height (4000vh/667)
+		font-size (1500vh/667)
+	&.blue
+		background-color #06f
+		color #fff
