@@ -1,5 +1,5 @@
 # Auth
-## About this project
+## About this project
 * Website: [https://auth.ikindness.cn](https://auth.ikindness.cn)
 * UI(todo): `Sketch`
 * JavaScript: `ECMAScript *`
@@ -14,6 +14,6 @@
 	1. `Node.js ^8`
 	2. `Koa ^2`
 	3. `Sequelize ^4`
-* Proxy server `Nginx ^1.12`
-* Static resource `AliOSS`
+* Proxy server: `Nginx ^1.12`
+* Static resource: `AliOSS`
 * Test(todo): `Mocha ^3`
