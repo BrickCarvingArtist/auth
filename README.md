@@ -15,5 +15,6 @@
 	2. `Koa ^2`
 	3. `Sequelize ^4`
 * Proxy server: `Nginx ^1.12`
+* Database: `MySQL ^5.7`
 * Static resource: `AliOSS`
 * Test(todo): `Mocha ^3`

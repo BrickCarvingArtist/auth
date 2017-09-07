@@ -1,0 +1,5 @@
+.DS_Store
+configs/index.js
+**/node_modules
+logs
+front/statics

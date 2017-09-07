@@ -8,15 +8,17 @@ import verify from "./verify";
 import behavior from "./reset/behavior";
 import match from "./reset/match";
 import reset from "./reset";
-import profile from "./profile";
-import {crossDomain, validate, authorize} from "./middlewares";
+import getProfile from "./get_profile";
+import setProfile from "./set_profile";
+import {crossDomain, authorize} from "./middlewares";
+import validate from "./middlewares/validate";
 export default sequelize => {
 	const User = sequelize.import(resolve(__dirname, "../models/user"));
 	// User.sync();
 	return new Router({
 		prefix: "/api"
 	})
-	.use(crossDomain("http://localhost:8080"))
+	.use(crossDomain("http://localhost:4501"))
 	// 登录接口
 	.post("/in", body(), validate({
 		body: [
@@ -90,7 +92,13 @@ export default sequelize => {
 			}
 		]
 	}), reset(sequelize, User))
-	// 基本资料接口
-	.get("/profile", authorize(), profile(sequelize, User))
+	// 获取基本资料接口
+	.get("/profile", authorize(), getProfile(sequelize, User))
+	// 设置基本资料接口
+	.patch("/profile", authorize(), body(), validate({
+		body: ["user"]
+	}), setProfile(sequelize, User))
+	// 设置头像接口
+	// .patch("/avator", authorize(), avator())
 	.routes();
 };

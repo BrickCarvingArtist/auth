@@ -1,5 +1,4 @@
-import {success} from "../utils";
-import error from "../utils/error";
+import {success, error} from "../utils";
 export default (sequelize, User) => async ctx => {
 	const {tel} = ctx.state;
 	try{
