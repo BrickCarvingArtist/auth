@@ -1,13 +1,13 @@
 import fetch from "isomorphic-fetch";
 import {stringify} from "querystring";
-import {default_referer} from "../configs";
+import {server_name, default_referer} from "../configs";
 export const signIn = (user, password, referer = default_referer) => (async () => {
 	try{
 		const {
 			code,
 			data,
 			message
-		} = await (await fetch(`https://auth.ikindness.cn/api/in?referer=${referer}`, {
+		} = await (await fetch(`${server_name}/api/in?referer=${referer}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded"

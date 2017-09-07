@@ -68,6 +68,7 @@ if(NODE_ENV === "development"){
 				}
 			]
 		},
+		port: 4501,
 		hot: true,
 		contentBase: resolve(__dirname, "../../statics")
 	};

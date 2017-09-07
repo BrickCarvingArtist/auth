@@ -1,11 +1,12 @@
 import fetch from "isomorphic-fetch";
+import {server_name} from "../configs";
 export const setUserByInput = value => (async () => {
 	try{
 		const {
 			code,
 			data,
 			message
-		} = await (await fetch(`https://auth.ikindness.cn/api/check?user=${value}`)).json();
+		} = await (await fetch(`${server_name}/api/check?user=${value}`)).json();
 		if(code){
 			return {
 				type: "DIALOG_MESSAGE",

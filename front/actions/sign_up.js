@@ -1,12 +1,13 @@
 import fetch from "isomorphic-fetch";
 import {stringify} from "querystring";
+import {server_name} from "../configs";
 export const signUp = (user, password) => (async () => {
 	try{
 		const {
 			code,
 			data,
 			message
-		} = await (await fetch("https://auth.ikindness.cn/api/up", {
+		} = await (await fetch(`${server_name}/api/up`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded"

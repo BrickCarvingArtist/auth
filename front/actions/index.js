@@ -1,4 +1,3 @@
-import fetch from "isomorphic-fetch";
 import {stringify} from "querystring";
 export const setMessage = value => ({
 	type: "DIALOG_MESSAGE",

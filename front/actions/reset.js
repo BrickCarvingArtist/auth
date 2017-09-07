@@ -1,13 +1,13 @@
 import fetch from "isomorphic-fetch";
 import {stringify} from "querystring";
-import {default_referer} from "../configs";
+import {server_name, default_referer} from "../configs";
 export const setUserByToken = value => (async () => {
 	try{
 		const {
 			code,
 			data,
 			message
-		} = await (await fetch(`https://auth.ikindness.cn/api/verify?sso_token=${value}`)).json();
+		} = await (await fetch(`${server_name}/api/verify?sso_token=${value}`)).json();
 		if(code){
 			return {
 				type: "DIALOG_MESSAGE",
@@ -32,7 +32,7 @@ export const getBehavior = value => (async () => {
 			code,
 			data,
 			message
-		} = await (await fetch(`https://auth.ikindness.cn/api/behavior?user=${value}`)).json();
+		} = await (await fetch(`${server_name}/api/behavior?user=${value}`)).json();
 		if(code){
 			return {
 				type: "DIALOG_MESSAGE",
@@ -57,7 +57,7 @@ export const match = (user, articleId) => (async () => {
 			code,
 			data,
 			message
-		} = await (await fetch(`https://auth.ikindness.cn/api/match?user=${user}&article_id=${articleId}`)).json();
+		} = await (await fetch(`${server_name}/api/match?user=${user}&article_id=${articleId}`)).json();
 		if(code){
 			return {
 				type: "DIALOG_MESSAGE",
@@ -82,7 +82,7 @@ export const reset = (user, password, sso_token, referer = default_referer) => (
 			code,
 			data,
 			message
-		} = await (await fetch(`https://auth.ikindness.cn/api/reset?referer=${referer}`, {
+		} = await (await fetch(`${server_name}/api/reset?referer=${referer}`, {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
