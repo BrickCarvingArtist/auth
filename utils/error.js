@@ -1,18 +1,17 @@
 import {resolve} from "path";
 import {ERROR} from "../configs";
 import {appendFile} from "./";
-const getMessage = code => ERROR[code] || "系统繁忙";
-const getResult = (code, argName) => {
-	let message = getMessage(code);
-	argName && (message += `（参数：${argName}）`);
+const getResult = (code, comment) => {
+	let message = ERROR[code] || "系统繁忙";
+	if(comment){
+		message = `${comment}有误，${message}`;
+	}
 	return {
 		code,
 		message
 	};
 };
-const format = a => {
-	return a < 10 ? `0${a}` : a;
-};
+const format = a => a < 10 ? `0${a}` : a;
 const writeErrorLog = async (ctx, code, message, e = "未定义错误对象") => {
 	const date = new Date;
 	let y = date.getFullYear(),
@@ -41,9 +40,9 @@ const writeErrorLog = async (ctx, code, message, e = "未定义错误对象") =>
 		console.log("打印日志错误！");
 	}
 };
-export default (code, {ctx, e, argName}) => {
+export default ({code, comment, ctx, e}) => {
 	e && console.dir(e);
-	const result = getResult(code, argName);
+	const result = getResult(code, comment);
 	writeErrorLog(ctx, code, result.message, e);
 	return result;
 };

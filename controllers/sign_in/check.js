@@ -1,5 +1,6 @@
+import {User} from "../";
 import {success, error} from "../../utils";
-export default (User) => async ctx => {
+export default () => async ctx => {
 	const {user} = ctx.query;
 	try{
 		ctx.body = success(await User.count({

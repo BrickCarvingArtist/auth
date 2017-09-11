@@ -4,7 +4,8 @@ import {success, error} from "../utils";
 export default () => async (ctx, next) => {
 	const {sso_token} = ctx.query;
 	if(!sso_token){
-		return ctx.body = error(5000000600, {
+		return ctx.body = error({
+			code: 5000000600,
 			ctx
 		});
 	}
@@ -15,7 +16,8 @@ export default () => async (ctx, next) => {
 		} = verify(sso_token, TOKEN_SECRET);
 		return ctx.body = success(tel);
 	}catch(e){
-		return ctx.body = error(5000000601, {
+		return ctx.body = error({
+			code: 5000000601,
 			ctx,
 			e
 		});

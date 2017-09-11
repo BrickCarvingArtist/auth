@@ -1,7 +1,8 @@
 import {hash} from "bcrypt";
+import {User} from "../";
 import {TOKEN_SECRET} from "../../configs";
 import {success, error} from "../../utils";
-export default (sequelize, User) => async ctx => {
+export default () => async ctx => {
 	const {user, password} = ctx.request.body;
 	try{
 		const pwd = await hash(password, 10);
@@ -12,13 +13,15 @@ export default (sequelize, User) => async ctx => {
 			});
 			ctx.body = success("https://punchy.ikindness.cn/me");
 		}catch(e){
-			ctx.body = error(5000000302, {
+			ctx.body = error({
+				code: 5000000302,
 				ctx,
 				e
 			});
 		}
 	}catch(e){
-		ctx.body = error(5000000301, {
+		ctx.body = error({
+			code: 5000000301,
 			ctx,
 			e
 		});

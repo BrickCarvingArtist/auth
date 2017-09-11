@@ -1,4 +1,3 @@
-import {resolve} from "path";
 import Router from "koa-router";
 import body from "koa-bodyparser";
 import signIn from "./sign_in";
@@ -13,7 +12,6 @@ import setProfile from "./set_profile";
 import {crossDomain, authorize} from "./middlewares";
 import validate from "./middlewares/validate";
 export default sequelize => {
-	const User = sequelize.import(resolve(__dirname, "../models/user"));
 	// User.sync();
 	return new Router({
 		prefix: "/api"
@@ -26,7 +24,9 @@ export default sequelize => {
 				name: "user",
 				alias: "tel"
 			},
-			"password"
+			{
+				name: "password"
+			}
 		],
 		query: [
 			{
@@ -35,7 +35,7 @@ export default sequelize => {
 				required: false
 			}
 		]
-	}), signIn(sequelize, User))
+	}), signIn())
 	// 检验手机号是否合理接口
 	.get("/check", validate({
 		query: [
@@ -44,7 +44,7 @@ export default sequelize => {
 				alias: "tel"
 			}
 		]
-	}), check(User))
+	}), check())
 	// 注册接口
 	.put("/up", body(), validate({
 		body: [
@@ -52,9 +52,11 @@ export default sequelize => {
 				name: "user",
 				alias: "tel"
 			},
-			"password"
+			{
+				name: "password"
+			}
 		]
-	}), signUp(sequelize, User))
+	}), signUp())
 	// 根据sso_token获取手机号
 	.get("/verify", verify())
 	// 用户行为检验问题接口
@@ -65,7 +67,7 @@ export default sequelize => {
 				alias: "tel"
 			}
 		]
-	}), behavior(sequelize))
+	}), behavior())
 	// 用户行为匹配接口
 	.get("/match", validate({
 		query: [
@@ -74,7 +76,7 @@ export default sequelize => {
 				alias: "tel"
 			}
 		]
-	}), match(sequelize))
+	}), match())
 	// 重置密码接口
 	.patch("/reset", authorize(), body(), validate({
 		body: [
@@ -82,7 +84,9 @@ export default sequelize => {
 				name: "user",
 				alias: "tel"
 			},
-			"password"
+			{
+				name: "password"
+			}
 		],
 		query: [
 			{
@@ -91,13 +95,17 @@ export default sequelize => {
 				required: false
 			}
 		]
-	}), reset(sequelize, User))
+	}), reset())
 	// 获取基本资料接口
-	.get("/profile", authorize(), getProfile(sequelize, User))
+	.get("/profile", authorize(), getProfile())
 	// 设置基本资料接口
 	.patch("/profile", authorize(), body(), validate({
-		body: ["user"]
-	}), setProfile(sequelize, User))
+		body: [
+			{
+				name: "user"
+			}
+		]
+	}), setProfile())
 	// 设置头像接口
 	// .patch("/avator", authorize(), avator())
 	.routes();

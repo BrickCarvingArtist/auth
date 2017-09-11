@@ -1,9 +1,10 @@
 import {URL} from "url";
 import {compare} from "bcrypt";
 import {sign} from "jsonwebtoken";
+import {User} from "../";
 import {TOKEN_SECRET} from "../../configs";
 import {success, error} from "../../utils";
-export default (sequelize, User) => async ctx => {
+export default () => async ctx => {
 	const {user, password} = ctx.request.body,
 		tel = user;
 	try{

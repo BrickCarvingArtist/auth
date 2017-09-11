@@ -1,9 +1,10 @@
 import {compare, hash} from "bcrypt";
 import {URL} from "url";
 import {sign} from "jsonwebtoken";
+import {User} from "../";
 import {TOKEN_SECRET} from "../../configs";
 import {success, error} from "../../utils";
-export default (sequelize, User) => async ctx => {
+export default () => async ctx => {
 	const {
 		user,
 		password
@@ -16,7 +17,8 @@ export default (sequelize, User) => async ctx => {
 			}
 		});
 		if(!user){
-			return ctx.body = error(5000000500, {
+			return ctx.body = error({
+				code: 5000000500,
 				ctx
 			}); 
 		}
@@ -40,19 +42,22 @@ export default (sequelize, User) => async ctx => {
 				}));
 				return ctx.body = success(referer.href);
 			}catch(e){
-				return ctx.body = error(5000000503, {
+				return ctx.body = error({
+					code: 5000000503,
 					ctx,
 					e
 				});
 			}
 		}catch(e){
-			return ctx.body = error(5000000502, {
+			return ctx.body = error({
+				code: 5000000502,
 				ctx,
 				e
 			});
 		}
 	}catch(e){
-		ctx.body = error(5000000501, {
+		ctx.body = error({
+			code: 5000000501,
 			ctx,
 			e
 		});

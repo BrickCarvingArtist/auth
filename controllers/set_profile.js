@@ -1,5 +1,6 @@
+import {User} from "./";
 import {success, error} from "../utils";
-export default (sequelize, User) => async ctx => {
+export default () => async ctx => {
 	const {tel} = ctx.state;
 	const {user} = ctx.request.body;
 	try{
@@ -13,8 +14,12 @@ export default (sequelize, User) => async ctx => {
 		if(affectedCount.length){
 			return ctx.body = success();
 		}
-		ctx.body = error(ctx, e, 50000000);
+		throw 5000000801;
 	}catch(e){
-		ctx.body = error(ctx, e, 50000000);
+		ctx.body = error({
+			code: 5000000801,
+			ctx,
+			e
+		});
 	}
 };

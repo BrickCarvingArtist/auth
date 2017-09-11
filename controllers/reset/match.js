@@ -1,13 +1,15 @@
 import {sign} from "jsonwebtoken";
+import {sequelize} from "../";
 import {TOKEN_SECRET} from "../../configs";
 import {success, error} from "../../utils";
-export default sequelize => async ctx => {
+export default () => async ctx => {
 	const {
 		user,
 		article_id
 	} = ctx.query;
 	if(!article_id){
-		return ctx.body = error(5000000700, {
+		return ctx.body = error({
+			code: 5000000700,
 			ctx
 		});
 	}
@@ -22,11 +24,13 @@ export default sequelize => async ctx => {
 				expiresIn: 60 * 60 * 24
 			}));
 		}
-		return ctx.body = error(5000000702, {
+		return ctx.body = error({
+			code: 5000000702,
 			ctx
 		});
 	}catch(e){
-		ctx.body = error(5000000701, {
+		ctx.body = error({
+			code: 5000000701,
 			ctx,
 			e
 		});

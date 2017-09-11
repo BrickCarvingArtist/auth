@@ -1,5 +1,6 @@
+import {sequelize} from "../";
 import {success, error} from "../../utils";
-export default sequelize => async ctx => {
+export default () => async ctx => {
 	const {user} = ctx.query;
 	try{
 		// 如果用户从未阅读过任何文章便要修改密码，则无法修改
@@ -7,7 +8,8 @@ export default sequelize => async ctx => {
 			type: sequelize.QueryTypes.SELECT
 		}));
 	}catch(e){
-		ctx.body = error(5000000602, {
+		ctx.body = error({
+			code: 5000000602,
 			ctx,
 			e
 		});

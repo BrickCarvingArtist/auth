@@ -53,13 +53,15 @@ export default () => async (ctx, next) => {
 				.replace(/(<title>)(<\/title>)/, `$1${title}$2`)
 				.replace(/(<div id="app">)(<\/div>)/, `$1${html}$2${pageJs}`);
 		}catch(e){
-			ctx.body = error(5009900001, {
+			ctx.body = error({
+				code: 5009900001,
 				ctx,
 				e
 			});
 		}
 	}catch(e){
-		ctx.body = error(5009900000, {
+		ctx.body = error({
+			code: 5009900000,
 			ctx,
 			e
 		});
