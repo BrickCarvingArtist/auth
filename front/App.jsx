@@ -34,12 +34,12 @@ export const routes = [
 ];
 export default withRouter(connect()(({match, dispatch}) => (
 	<main>
-		<Dialog />
 		{
 			match.path == "/" && match.isExact ? [] : <Header />
 		}
 		{
 			routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} dispatch={dispatch} />)
 		}
+		<Dialog />
 	</main>
 )));
