@@ -1,5 +1,7 @@
 import Router from "koa-router";
 import body from "koa-bodyparser";
+import {crossDomain, authorize} from "./middlewares";
+import validate from "./middlewares/validate";
 import signIn from "./sign_in";
 import check from "./sign_in/check";
 import signUp from "./sign_up";
@@ -9,8 +11,7 @@ import match from "./reset/match";
 import reset from "./reset";
 import getProfile from "./get_profile";
 import setProfile from "./set_profile";
-import {crossDomain, authorize} from "./middlewares";
-import validate from "./middlewares/validate";
+import setAvator from "./set_avator";
 export default sequelize => {
 	// User.sync();
 	return new Router({
@@ -74,6 +75,11 @@ export default sequelize => {
 			{
 				name: "user",
 				alias: "tel"
+			},
+			{
+				name: "article_id",
+				alias: "number",
+				comment: "文章id"
 			}
 		]
 	}), match())
@@ -107,6 +113,14 @@ export default sequelize => {
 		]
 	}), setProfile())
 	// 设置头像接口
-	// .patch("/avator", authorize(), avator())
+	.patch("/avator", authorize(), body(), validate({
+		body: [
+			{
+				name: "avator",
+				alias: "url",
+				comment: "用户头像"
+			}
+		]
+	}), setAvator())
 	.routes();
 };

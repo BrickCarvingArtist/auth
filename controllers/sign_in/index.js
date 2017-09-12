@@ -1,45 +1,16 @@
-import {URL} from "url";
-import {compare} from "bcrypt";
-import {sign} from "jsonwebtoken";
-import {User} from "../";
-import {TOKEN_SECRET} from "../../configs";
 import {success, error} from "../../utils";
+import {signIn} from "../../services/user";
 export default () => async ctx => {
-	const {user, password} = ctx.request.body,
-		tel = user;
+	const {user, password} = ctx.request.body;
 	try{
-		const user = await User.findOne({
-			where: {
-				tel
-			}
-		});
-		if(!user){
-			return ctx.body = error(5000000401, {
-				ctx
-			});
-		}
-		try{
-			if(await compare(password, user.password)){
-				let {referer} = ctx.query;
-				referer = new URL(referer || "https://punchy.ikindness.cn/");
-				referer.searchParams.append("sso_token", sign({
-					tel
-				}, TOKEN_SECRET, {
-					expiresIn: 60 * 60 * 24
-				}));
-				return ctx.body = success(referer.href);
-			}
-			return ctx.body = error(5000000403, {
-				ctx
-			});
-		}catch(e){
-			return ctx.body = error(5000000402, {
-				ctx,
-				e
-			});
-		}
+		ctx.body = success(await signIn({
+			tel: user,
+			password,
+			referer: ctx.query.referer
+		}));
 	}catch(e){
-		ctx.body = error(5000000400, {
+		ctx.body = error({
+			code: e.code || 5000000400,
 			ctx,
 			e
 		});

@@ -1,12 +1,8 @@
-import Sequelize from "sequelize";
-import {resolve} from "path";
-import {SERVER, DB} from "../configs";
-import {formatSQLAddress, error} from "../utils";
+import {sequelize} from "../services";
+import {SERVER} from "../configs";
+import {error} from "../utils";
 import user from "./user";
 import page from "./page";
-export const sequelize = new Sequelize(...formatSQLAddress(DB));
-const imports = modelPath => sequelize.import(resolve(__dirname, modelPath));
-export const User = imports("../models/user");
 export default async app => {
 	try{
 		await sequelize.authenticate();

@@ -1,14 +1,8 @@
-import {User} from "./";
 import {success, error} from "../utils";
+import {getProfile} from "../services/user";
 export default () => async ctx => {
-	const {tel} = ctx.state;
 	try{
-		ctx.body = success(await User.findOne({
-			where: {
-				tel
-			},
-			attributes: ["tel", "name", "created_at"]
-		}));
+		ctx.body = success(await getProfile(ctx.state.tel));
 	}catch(e){
 		ctx.body = error({
 			code: 5000000800,

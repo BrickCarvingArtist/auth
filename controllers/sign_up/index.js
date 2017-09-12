@@ -1,27 +1,15 @@
-import {hash} from "bcrypt";
-import {User} from "../";
-import {TOKEN_SECRET} from "../../configs";
 import {success, error} from "../../utils";
+import {signUp} from "../../services/user";
 export default () => async ctx => {
 	const {user, password} = ctx.request.body;
 	try{
-		const pwd = await hash(password, 10);
-		try{
-			await User.create({
-				tel: user,
-				password: pwd
-			});
-			ctx.body = success("https://punchy.ikindness.cn/me");
-		}catch(e){
-			ctx.body = error({
-				code: 5000000302,
-				ctx,
-				e
-			});
-		}
+		ctx.body = success(await signUp({
+			tel: user,
+			password
+		}));
 	}catch(e){
 		ctx.body = error({
-			code: 5000000301,
+			code: e.code || 5000000301,
 			ctx,
 			e
 		});

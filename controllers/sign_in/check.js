@@ -1,15 +1,11 @@
-import {User} from "../";
 import {success, error} from "../../utils";
+import {check} from "../../services/user";
 export default () => async ctx => {
-	const {user} = ctx.query;
 	try{
-		ctx.body = success(await User.count({
-			where: {
-				tel: user
-			}
-		}));
+		ctx.body = success(await check(ctx.query.user));
 	}catch(e){
-		ctx.body = error(5000000300, {
+		ctx.body = error({
+			code: 5000000300,
 			ctx,
 			e
 		});

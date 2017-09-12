@@ -1,23 +1,14 @@
-import {User} from "./";
 import {success, error} from "../utils";
+import {setProfile} from "../services/user";
 export default () => async ctx => {
-	const {tel} = ctx.state;
-	const {user} = ctx.request.body;
 	try{
-		const affectedCount = await User.update({
-			name: user
-		}, {
-			where: {
-				tel
-			}
-		});
-		if(affectedCount.length){
-			return ctx.body = success();
-		}
-		throw 5000000801;
+		ctx.body = success(await setProfile({
+			tel: ctx.state.tel,
+			name: ctx.request.body.user
+		}));
 	}catch(e){
 		ctx.body = error({
-			code: 5000000801,
+			code: e.code || 5000000801,
 			ctx,
 			e
 		});

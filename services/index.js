@@ -1,0 +1,10 @@
+import {resolve} from "path";
+import Sequelize from "sequelize";
+import {DB} from "../configs";
+import {formatSQLAddress} from "./utils";
+export const sequelize = new Sequelize(...formatSQLAddress(DB));
+const imports = modelPath => sequelize.import(resolve(__dirname, modelPath));
+export const User = imports("../models/user");
+export const UserInfo = imports("../models/user_info");
+// User.sync();
+// UserInfo.sync();

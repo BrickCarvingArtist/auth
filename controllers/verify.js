@@ -1,7 +1,6 @@
-import {verify} from "jsonwebtoken";
-import {TOKEN_SECRET} from "../configs";
 import {success, error} from "../utils";
-export default () => async (ctx, next) => {
+import {verifyToken} from "../services/user";
+export default () => async ctx => {
 	const {sso_token} = ctx.query;
 	if(!sso_token){
 		return ctx.body = error({
@@ -10,17 +9,12 @@ export default () => async (ctx, next) => {
 		});
 	}
 	try{
-		const {
-			tel,
-			exp
-		} = verify(sso_token, TOKEN_SECRET);
-		return ctx.body = success(tel);
+		ctx.body = success(await verifyToken(sso_token));
 	}catch(e){
-		return ctx.body = error({
+		ctx.body = error({
 			code: 5000000601,
 			ctx,
 			e
 		});
 	}
-	await next();
 }
