@@ -3,13 +3,12 @@ import {URL} from "url";
 import {sign} from "jsonwebtoken";
 import {sequelize, User, UserInfo} from "./";
 import {TOKEN_SECRET} from "../configs";
+User.hasOne(UserInfo, {
+	foreignKey: "user_id"
+});
 UserInfo.belongsTo(User, {
 	foreignKey: "user_id",
 	targetKey: "tel"
-});
-User.hasMany(UserInfo, {
-	foreignKey: "user_id",
-	sourceKey: "tel"
 });
 export const check = tel => User.count({
 	where: {
@@ -124,12 +123,25 @@ export const reset = async ({tel, password, referer}) => {
 		};
 	}
 };
-export const getProfile = tel => User.findOne({
-	where: {
-		tel
-	},
-	attributes: ["tel", "name", "created_at"]
-});
+export const getProfile = async tel => {
+	const profile = await User.findOne({
+		where: {
+			tel
+		},
+		include: [{
+			model: UserInfo,
+			attributes: ["avator"],
+			on: {
+				user_id: tel
+			}
+		}],
+		attributes: ["tel", "name", "created_at"],
+		raw: true
+	});
+	profile.avator = profile["user_info.avator"];
+	delete profile["user_info.avator"];
+	return profile;
+};
 export const setProfile = async ({tel, name}) => {
 	const affectedCount = await User.update({
 		name
