@@ -11,6 +11,21 @@ export default (state = {}, {type, value}) => {
 				...state,
 				message: value
 			};
+		case "HEADER_LEFT_BUTTON":
+			return {
+				...state,
+				headerLeftButton: value
+			};
+		case "HEADER_RIGHT_BUTTON":
+			return {
+				...state,
+				headerRightButton: value
+			};
+		case "FOOTER_TYPE":
+			return {
+				...state,
+				footerType: value
+			};
 		default:
 			return state;
 	}

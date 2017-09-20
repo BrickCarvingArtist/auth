@@ -1,7 +1,8 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {setMessage, setTitle} from "../actions";
+import {basis} from "../actions";
 import {signIn} from "../actions/sign_in";
 import {signUp} from "../actions/sign_up";
 import {parse} from "querystring";
@@ -9,11 +10,21 @@ import {parse} from "querystring";
 	user: home.user,
 	signType: home.signType
 }), dispatch => bindActionCreators({
-	setMessage,
-	setTitle
+	...basis
 }, dispatch))
 @connect()
 export default class Distributor extends Component{
+	componentWillMount(){
+		const {
+			setTitle,
+			setHeaderLeftButton
+		} = this.props;
+		setTitle(`${this.getTitleName()} | Punchy`);
+		setHeaderLeftButton("back");
+	}
+	getTitleName(){
+		return ["注册", "登录"][this.props.signType];
+	}
 	render(){
 		const {
 			dispatch,
@@ -24,13 +35,14 @@ export default class Distributor extends Component{
 		} = this.props;
 		let ipt;
 		return (
-			<form>
-				<input type="password" className="full" placeholder="请填写密码" maxLength="16" pattern="^.{6,16}$" required ref={
+			<form className="page distributor with-footer">
+				<output>{user}</output>
+				<input type="password" className="center" placeholder="请填写密码" maxLength="16" pattern="^.{6,16}$" required ref={
 					dom => {
 						ipt = dom;
 					}
 				} />
-				<button type="button" className="bottom blue" onClick={
+				<button type="button" className="center below_input blue" onClick={
 					async () => {
 						if(!ipt.checkValidity()){
 							return setMessage(["为了您账号的安全起见，密码需要6至16位哦", "密码需要6至16位哦"][signType]);
@@ -49,8 +61,9 @@ export default class Distributor extends Component{
 						ok && (location.href = value);
 					}
 				}>{
-					["注册", "登录"][signType]
+					this.getTitleName()
 				}</button>
+				<Link to="/behavior">忘记密码</Link>
 			</form>
 		);
 	}

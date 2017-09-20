@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {setTitle} from "../actions";
+import {basis} from "../actions";
 import {setUserByToken, getBehavior, match} from "../actions/reset";
-import {qs} from "../utils";
+import {parse} from "querystring";
 @connect(({home}) => ({
 	user: home.user,
 	behavior: home.behavior
-}), dispatch => bindActionCreators({setTitle}, dispatch))
+}), dispatch => bindActionCreators({
+	...basis
+}, dispatch))
 @connect()
 export default class Behavior extends Component{
 	async fetch(){
@@ -18,7 +20,13 @@ export default class Behavior extends Component{
 		dispatch(await getBehavior(user));
 	}
 	async componentWillMount(){
-		const {sso_token} = qs.parse(location.search.slice(1));
+		const {
+			setTitle,
+			setHeaderLeftButton
+		} = this.props;
+		setTitle("行为检验 | Punchy");
+		setHeaderLeftButton("back");
+		const {sso_token} = parse(location.search.slice(1));
 		sso_token && this.props.dispatch(await setUserByToken(sso_token));
 		this.fetch();
 	}
@@ -30,7 +38,7 @@ export default class Behavior extends Component{
 			behavior
 		} = this.props;
 		return (
-			<form className="behavior">
+			<form className="page behavior with-footer">
 				<label>以下哪篇文章是您最近阅读过的？</label>
 				<fieldset>
 					{

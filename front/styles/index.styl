@@ -2,25 +2,43 @@
 @import "./icon"
 @import "./mixin"
 body
-	background-color #f3f3f3
+	padding-top h(20)
+	background-color #000
+.page
+	overflow-y scroll
+	&.with-both
+		height h(667)
+	&.with-footer
+		height h(602)
+	&.without-footer
+		height h(552)
 form
 	display flex
 	flex-direction column
 	align-items center
+	background-color #fff
 	> label
 		line-height h(50)
 		font-size h(16)
 		color #666
 	&.home
-		padding-top h(300)
-		bg("/test.jpeg")
+		padding-top h(280)
+		bg("/logo.svg")
 		background-repeat no-repeat
-		background-position 50% h(100)
-		.etc
-			h3
-				margin-top h(80)
-				text-align center
-				line-height 2
+		background-position 50% h(160)
+		background-size w(285) auto
+	&.distributor
+		output
+			margin-top h(30)
+			width w(285)
+			height h(45)
+			line-height @height
+			font-size h(15)
+			color #333
+		a
+			margin-top h(15)
+			font-size h(13)
+			color #639efe
 	&.behavior
 		padding 0 w(20)
 		section
@@ -51,24 +69,21 @@ input
 		width 100%
 		&:not(:last-of-type)
 			border-bottom-color #e3e3e3
+	&.center
+		width w(285)
+		border-bottom-color #e3e3e3
 button
 	font-size h(15)
 	&.full
 		width w(335)
 		height h(45)
-	&.below_input
-		margin-top h(20)
-button
-.anchor
-	&.bottom
-		position fixed
-		bottom 0
-		width w(375)
+	&.center
+		width w(285)
 		height h(45)
-		border-radius 0
-		text-align center
-		line-height h(40)
-		font-size h(15)
+		letter-spacing (@font-size/2)
+		border-radius 6px
+	&.below_input
+		margin-top h(30)
 	&.blue
-		background-color #639efe
+		background-image linear-gradient(40deg, #b9d7ff 0%, #639efe 100%)
 		color #fff

@@ -1,18 +1,25 @@
 import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {setTitle, setMessage} from "../actions";
+import {basis} from "../actions";
 import {reset} from "../actions/reset";
 import {parse} from "querystring";
 @connect(({home}) => ({
 	user: home.user,
 	sso_token: home.sso_token
 }), dispatch => bindActionCreators({
-	setMessage,
-	setTitle
+	...basis
 }, dispatch))
 @connect()
 export default class Reset extends Component{
+	componentWillMount(){
+		const {
+			setTitle,
+			setHeaderLeftButton
+		} = this.props;
+		setTitle("修改密码 | Punchy");
+		setHeaderLeftButton("back");
+	}
 	render(){
 		const {
 			dispatch,
@@ -22,13 +29,13 @@ export default class Reset extends Component{
 		} = this.props;
 		let ipt;
 		return (
-			<form className="reset">
-				<input type="password" className="full" placeholder="请输入新密码" maxLength="16" pattern="^\S{6,16}$" required ref={
+			<form className="page reset with-footer">
+				<input type="password" className="center" placeholder="请输入新密码" maxLength="16" pattern="^\S{6,16}$" required ref={
 					dom => {
 						ipt = dom;
 					}
 				} />
-				<button type="button" className="bottom blue" onClick={
+				<button type="button" className="center below_input blue" onClick={
 					async () => {
 						if(!ipt.checkValidity()){
 							return setMessage("重复密码长度需在6至16位内");

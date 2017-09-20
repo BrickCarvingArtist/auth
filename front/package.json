@@ -4,7 +4,7 @@
   "description": "the front side of https://auth.ikindness.cn",
   "scripts": {
     "serve": "webpack-dev-server --config webpack.config.babel.js",
-    "build": "webpack --config webpack.config.babel.js"
+    "build": "webpack --config webpack.config.babel.js -w"
   },
   "author": "BrickCarvingArtist",
   "license": "MIT",
