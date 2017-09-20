@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Distributor from "./pages/Distributor";
 import Behavior from "./pages/Behavior";
 import Reset from "./pages/Reset";
-import {setTitle} from "./actions";
 import {RouteWithSubRoutes} from "./utils";
 export const routes = [
 	{
@@ -32,13 +31,13 @@ export const routes = [
 		title: "修改密码"
 	}
 ];
-export default withRouter(connect()(({match, dispatch}) => (
+export default withRouter(connect()(({match}) => (
 	<main>
 		{
-			match.path == "/" && match.isExact ? [] : <Header />
+			match.path == "/" && match.isExact ? null : <Header />
 		}
 		{
-			routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} dispatch={dispatch} />)
+			routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
 		}
 		<Dialog />
 	</main>
