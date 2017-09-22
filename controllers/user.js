@@ -102,8 +102,18 @@ export default sequelize => {
 			}
 		]
 	}), reset())
-	// 获取基本资料接口
+	// 获取本人基本资料接口
 	.get("/profile", authorize(), getProfile())
+	// 根据用户获取基本资料接口
+	.get("/profile/:id", validate({
+		params: [
+			{
+				name: "id",
+				alias: "tel",
+				comment: "用户id"
+			}
+		]
+	}), getProfile())
 	// 设置基本资料接口
 	.patch("/profile", authorize(), body(), validate({
 		body: [
