@@ -12,7 +12,8 @@ export const signIn = (user, password, referer = default_referer) => (async () =
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded"
 			},
-			body: stringify({user, password})
+			body: stringify({user, password}),
+			credentials: "include"
 		})).json();
 		if(code){
 			return {

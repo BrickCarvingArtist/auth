@@ -1,5 +1,4 @@
 import {compare, hash, verify} from "bcrypt";
-import {URL} from "url";
 import {sign} from "jsonwebtoken";
 import {sequelize, User, UserInfo} from "./";
 import {TOKEN_SECRET} from "../configs";
@@ -15,7 +14,7 @@ export const check = tel => User.count({
 		tel
 	}
 });
-export const signIn = async ({tel, password, referer}) => {
+export const signIn = async ({tel, password}) => {
 	const user = await User.findOne({
 		where: {
 			tel
@@ -28,13 +27,11 @@ export const signIn = async ({tel, password, referer}) => {
 	}
 	try{
 		if(await compare(password, user.password)){
-			referer = new URL(referer || "https://punchy.ikindness.cn/");
-			referer.searchParams.append("sso_token", sign({
+			return sign({
 				tel
 			}, TOKEN_SECRET, {
 				expiresIn: 60 * 60 * 24
-			}));
-			return referer.href;
+			});
 		}
 		throw {
 			code: 5000000403
