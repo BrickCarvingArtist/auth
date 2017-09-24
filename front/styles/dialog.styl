@@ -1,15 +1,17 @@
+@import "./mixin";
 dialog
 	position fixed
 	top 50%
 	left 50%
 	transform translate(-50%, -50%)
-	padding (2000vh/667) (2000vw/375)
-	width (30000vw/375)
-	background-color #def
+	padding h(20) w(20)
+	max-width w(300)
+	background-color transparentify(#000, .8)
 	border-radius 4px
 	text-align center
-	font-size (1500vh/667)
-	line-height (2200vh/667)
+	font-size h(15)
+	line-height h(22)
+	color #fff
 	&.hidden
 		display none
 	&.display
