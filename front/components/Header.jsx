@@ -2,7 +2,9 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import classNames from "classnames";
-process.title === "node" || require("../styles/header.styl");
+try{
+	require("../styles/header");
+}catch(e){}
 const LEVELS = ["normal", "blue", "red"];
 const Button = ({icon, label, to, onClick = function(){}, level = 0}) => {
 	if(icon){

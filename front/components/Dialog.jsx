@@ -3,7 +3,9 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import classNames from "classnames";
 import {setMessage} from "../actions";
-process.title === "node" || require("../styles/dialog.styl");
+try{
+	require("../styles/dialog");
+}catch(e){}
 @connect(({core}) => ({
 	message: core.message
 }), dispatch => bindActionCreators({setMessage}, dispatch))
