@@ -54,8 +54,9 @@ export default class Distributor extends Component{
 							} = dispatch(await signIn(user, ipt.value, parse(location.search.slice(1)).referer));
 							if(ok){
 								setMessage("登录成功");
-								return location.href = value;
+								location.href = value;
 							}
+							return;
 						}
 						const {
 							ok,
