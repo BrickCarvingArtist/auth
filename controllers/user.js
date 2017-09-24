@@ -12,6 +12,7 @@ import reset from "./reset";
 import getProfile from "./get_profile";
 import setProfile from "./set_profile";
 import setAvator from "./set_avator";
+import out from "./out";
 export default sequelize => {
 	// User.sync();
 	return new Router({
@@ -132,5 +133,7 @@ export default sequelize => {
 			}
 		]
 	}), setAvator())
+	// 退出登录接口
+	.get("/out", out())
 	.routes();
 };
