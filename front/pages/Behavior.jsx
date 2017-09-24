@@ -34,6 +34,7 @@ export default class Behavior extends Component{
 	render(){
 		const {
 			dispatch,
+			setMessage,
 			history,
 			user,
 			behavior
