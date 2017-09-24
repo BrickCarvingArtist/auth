@@ -12,13 +12,6 @@ import {parse} from "querystring";
 }, dispatch))
 @connect()
 export default class Behavior extends Component{
-	async fetch(){
-		const {
-			dispatch,
-			user
-		} = this.props;
-		dispatch(await getBehavior(user));
-	}
 	async componentWillMount(){
 		const {
 			setTitle,
@@ -29,6 +22,15 @@ export default class Behavior extends Component{
 		const {sso_token} = parse(location.search.slice(1));
 		sso_token && this.props.dispatch(await setUserByToken(sso_token));
 		this.fetch();
+	}
+	async fetch(){
+		const {
+			dispatch,
+			setMessage,
+			user
+		} = this.props;
+		const {ok} = dispatch(await getBehavior(user));
+		ok && setMessage("行为检验成功");
 	}
 	render(){
 		const {

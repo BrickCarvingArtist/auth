@@ -44,7 +44,10 @@ export default class Reset extends Component{
 							ok,
 							value
 						} = dispatch(await reset(user, ipt.value, sso_token, parse(location.search.slice(1)).referer));
-						ok && (location.href = value);
+						if(ok){
+							setMessage("修改成功");
+							location.href = value;
+						}
 					}
 				}>确定</button>
 			</form>

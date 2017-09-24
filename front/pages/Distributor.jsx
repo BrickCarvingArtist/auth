@@ -52,13 +52,19 @@ export default class Distributor extends Component{
 								ok,
 								value
 							} = dispatch(await signIn(user, ipt.value, parse(location.search.slice(1)).referer));
-							return ok && (location.href = value);
+							if(ok){
+								setMessage("登录成功");
+								return location.href = value;
+							}
 						}
 						const {
 							ok,
 							value
 						} = dispatch(await signUp(user, ipt.value));
-						ok && (location.href = value);
+						if(ok){
+							setMessage("注册成功");
+							return location.href = value;
+						}
 					}
 				}>{
 					this.getTitleName()
