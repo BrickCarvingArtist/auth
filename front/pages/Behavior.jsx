@@ -29,8 +29,7 @@ export default class Behavior extends Component{
 			setMessage,
 			user
 		} = this.props;
-		const {ok} = dispatch(await getBehavior(user));
-		ok && setMessage("行为检验成功");
+		dispatch(await getBehavior(user));
 	}
 	render(){
 		const {
@@ -49,6 +48,7 @@ export default class Behavior extends Component{
 								async () => {
 									const {ok} = dispatch(await match(user, id));
 									if(ok){
+										setMessage("行为检验成功");
 										return history.push(`/reset${location.search}`);
 									}
 									this.fetch();
