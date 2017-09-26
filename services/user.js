@@ -132,7 +132,7 @@ export const getProfile = async tel => {
 				attributes: ["avator"],
 				as: "info",
 				on: {
-					user_id: "tel"
+					user_id: tel
 				}
 			}
 		],
