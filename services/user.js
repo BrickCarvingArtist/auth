@@ -130,7 +130,10 @@ export const getProfile = async tel => {
 			{
 				model: UserInfo,
 				attributes: ["avator"],
-				as: "info"
+				as: "info",
+				on: {
+					user_id: "tel"
+				}
 			}
 		],
 		attributes: ["tel", "name", "created_at"],
