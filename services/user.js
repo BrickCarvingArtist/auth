@@ -3,7 +3,8 @@ import {sign} from "jsonwebtoken";
 import {sequelize, User, UserInfo} from "./";
 import {TOKEN_SECRET} from "../configs";
 User.hasOne(UserInfo, {
-	foreignKey: "user_id"
+	foreignKey: "user_id",
+	as: "info"
 });
 UserInfo.belongsTo(User, {
 	foreignKey: "user_id",
@@ -125,20 +126,40 @@ export const getProfile = async tel => {
 		where: {
 			tel
 		},
-		include: [{
-			model: UserInfo,
-			attributes: ["avator"],
-			on: {
-				user_id: tel
+		include: [
+			{
+				model: UserInfo,
+				attributes: ["avator"],
+				as: "info"
 			}
-		}],
+		],
 		attributes: ["tel", "name", "created_at"],
 		raw: true
-	});
-	profile.avator = profile["user_info.avator"];
-	delete profile["user_info.avator"];
+	}) || {};
+	profile.avator = profile["info.avator"];
+	delete profile["info.avator"];
 	return profile;
 };
+export const getProfiles = async tels => (await User.findAll({
+	where: {
+		tel: {
+			in: tels
+		}
+	},
+	include: [
+		{
+			model: UserInfo,
+			attributes: ["avator"],
+			as: "info"
+		}
+	],
+	attributes: ["tel", "name", "created_at"],
+	raw: true
+})).map(profile => {
+	profile.avator = profile["info.avator"];
+	delete profile["info.avator"];
+	return profile;
+});
 export const setProfile = async ({tel, name}) => {
 	const affectedCount = await User.update({
 		name

@@ -10,6 +10,7 @@ import behavior from "./reset/behavior";
 import match from "./reset/match";
 import reset from "./reset";
 import getProfile from "./get_profile";
+import getProfiles from "./get_profiles";
 import setProfile from "./set_profile";
 import setAvator from "./set_avator";
 import out from "./out";
@@ -105,6 +106,16 @@ export default sequelize => {
 	}), reset())
 	// 获取本人基本资料接口
 	.get("/profile", authorize(), getProfile())
+	// 批量获取用户基本资料接口
+	.get("/profiles", authorize(), validate({
+		query: [
+			{
+				name: "user_id",
+				alias: "tel",
+				comment: "用户id"
+			}
+		]
+	}), getProfiles())
 	// 根据用户获取基本资料接口
 	.get("/profile/:id", validate({
 		params: [
