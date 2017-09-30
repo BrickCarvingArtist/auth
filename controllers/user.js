@@ -107,7 +107,7 @@ export default sequelize => {
 	// 获取本人基本资料接口
 	.get("/profile", authorize(), getProfile())
 	// 批量获取用户基本资料接口
-	.get("/profiles", authorize(), getProfiles())
+	.get("/profiles", getProfiles())
 	// 根据用户获取基本资料接口
 	.get("/profile/:id", validate({
 		params: [
