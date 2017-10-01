@@ -8,7 +8,7 @@ export default (sequelize, {INTEGER, STRING}) => sequelize.define("user_info", {
 		type: STRING(11),
 		unique: true
 	},
-	avator: {
+	avatar: {
 		type: STRING(100)
 	}
 }, {

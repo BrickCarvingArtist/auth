@@ -1,10 +1,10 @@
 import {success, error} from "../utils";
-import {setAvator} from "../services/user";
+import {setAvatar} from "../services/user";
 export default () => async ctx => {
 	try{
-		ctx.body = success(await setAvator({
+		ctx.body = success(await setAvatar({
 			user_id: ctx.state.tel,
-			avator: ctx.request.body.avator
+			avatar: ctx.request.body.avatar
 		}));
 	}catch(e){
 		ctx.body = error({

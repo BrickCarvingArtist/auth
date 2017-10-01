@@ -129,7 +129,7 @@ export const getProfile = async tel => {
 		include: [
 			{
 				model: UserInfo,
-				attributes: ["avator"],
+				attributes: ["avatar"],
 				as: "info",
 				on: {
 					user_id: tel
@@ -139,8 +139,8 @@ export const getProfile = async tel => {
 		attributes: ["tel", "name", "created_at"],
 		raw: true
 	}) || {};
-	profile.avator = profile["info.avator"];
-	delete profile["info.avator"];
+	profile.avatar = profile["info.avatar"];
+	delete profile["info.avatar"];
 	return profile;
 };
 export const getProfiles = async tels => (await User.findAll({
@@ -152,15 +152,15 @@ export const getProfiles = async tels => (await User.findAll({
 	include: [
 		{
 			model: UserInfo,
-			attributes: ["avator"],
+			attributes: ["avatar"],
 			as: "info"
 		}
 	],
 	attributes: ["tel", "name", "created_at"],
 	raw: true
 })).map(profile => {
-	profile.avator = profile["info.avator"];
-	delete profile["info.avator"];
+	profile.avatar = profile["info.avatar"];
+	delete profile["info.avatar"];
 	return profile;
 });
 export const setProfile = async ({tel, name}) => {
@@ -176,10 +176,10 @@ export const setProfile = async ({tel, name}) => {
 	}
 	throw 5000000801;
 };
-export const setAvator = async ({user_id, avator}) => {
+export const setAvatar = async ({user_id, avatar}) => {
 	await UserInfo.upsert({
 		user_id,
-		avator
+		avatar
 	});
-	return avator;
+	return avatar;
 };

@@ -12,7 +12,7 @@ import reset from "./reset";
 import getProfile from "./get_profile";
 import getProfiles from "./get_profiles";
 import setProfile from "./set_profile";
-import setAvator from "./set_avator";
+import setAvatar from "./set_avatar";
 import out from "./out";
 export default sequelize => {
 	// User.sync();
@@ -127,15 +127,15 @@ export default sequelize => {
 		]
 	}), setProfile())
 	// 设置头像接口
-	.patch("/avator", authorize(), body(), validate({
+	.patch("/avatar", authorize(), body(), validate({
 		body: [
 			{
-				name: "avator",
+				name: "avatar",
 				alias: "url",
 				comment: "用户头像"
 			}
 		]
-	}), setAvator())
+	}), setAvatar())
 	// 退出登录接口
 	.get("/out", out())
 	.routes();
