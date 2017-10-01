@@ -1,4 +1,4 @@
-export default (sequelize, {INTEGER, STRING}) => sequelize.define("users", {
+export default (sequelize, {INTEGER, STRING}) => sequelize.define("user", {
 	id: {
 		type: INTEGER,
 		primaryKey: true,

@@ -8,7 +8,8 @@ User.hasOne(UserInfo, {
 });
 UserInfo.belongsTo(User, {
 	foreignKey: "user_id",
-	targetKey: "tel"
+	targetKey: "tel",
+	as: "info"
 });
 export const check = tel => User.count({
 	where: {
@@ -132,7 +133,7 @@ export const getProfile = async tel => {
 				attributes: ["avatar"],
 				as: "info",
 				on: {
-					user_id: tel
+					user_id: sequelize.literal("`user`.`tel`")
 				}
 			}
 		],
@@ -153,7 +154,10 @@ export const getProfiles = async tels => (await User.findAll({
 		{
 			model: UserInfo,
 			attributes: ["avatar"],
-			as: "info"
+			as: "info",
+			on: {
+				user_id: sequelize.literal("`user`.`tel`")
+			}
 		}
 	],
 	attributes: ["tel", "name", "created_at"],
