@@ -132,9 +132,7 @@ export const getProfile = async tel => {
 				model: UserInfo,
 				attributes: ["avatar"],
 				as: "info",
-				on: {
-					user_id: sequelize.literal("`user`.`tel`")
-				}
+				on: sequelize.literal("`info`.`user_id` = `user`.`tel`")
 			}
 		],
 		attributes: ["tel", "name", "created_at"],
@@ -155,9 +153,7 @@ export const getProfiles = async tels => (await User.findAll({
 			model: UserInfo,
 			attributes: ["avatar"],
 			as: "info",
-			on: {
-				user_id: sequelize.literal("`user`.`tel`")
-			}
+			on: sequelize.literal("`info`.`user_id` = `user`.`tel`")
 		}
 	],
 	attributes: ["tel", "name", "created_at"],
