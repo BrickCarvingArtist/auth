@@ -1,15 +1,16 @@
 {
-  "name": "ikindness_auth",
+  "name": "auth",
   "version": "0.0.1",
   "description": "the auth center of https://*.ikindness.cn",
-  "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BrickCarvingArtist/auth.git"
-  },
+  "main": "app.js",
+  "repository": "https://github.com/BrickCarvingArtist/auth.git",
   "scripts": {
-    "webpack": "webpack --config ./front/webpack.config.babel.js",
-    "start": "node server.js"
+    "prestart": "npm run eslint",
+    "start": "node server.js",
+    "build:develop": "npm install",
+    "build:product": "npm install --production",
+    "eslint": "./node_modules/.bin/eslint ./",
+    "test": "./node_modules/.bin/mocha"
   },
   "keywords": [
     "auth"
@@ -55,6 +56,9 @@
     "sequelize": "^4.6.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.8.0",
     "webpack": "^3.5.5"
-  }
+  },
+  "private": true
 }

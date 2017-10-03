@@ -24,8 +24,8 @@ export default () => async (ctx, next) => {
 			}catch(e){
 				try{
 					resolve(verify(ssoTokenByCookie, TOKEN_SECRET).tel);
-				}catch(e){
-					reject(e);
+				}catch(err){
+					reject(e || err);
 				}
 			}
 		});
@@ -36,5 +36,5 @@ export default () => async (ctx, next) => {
 			e
 		});
 	}
-	await next();
+	next();
 };

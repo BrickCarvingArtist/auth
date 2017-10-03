@@ -14,11 +14,9 @@ import getProfiles from "./get_profiles";
 import setProfile from "./set_profile";
 import setAvatar from "./set_avatar";
 import out from "./out";
-export default sequelize => {
-	// User.sync();
-	return new Router({
-		prefix: "/api"
-	})
+export default sequelize => new Router({
+	prefix: "/api"
+})
 	.use(crossDomain("http://localhost:4501"))
 	// 登录接口
 	.post("/in", body(), validate({
@@ -139,4 +137,3 @@ export default sequelize => {
 	// 退出登录接口
 	.get("/out", out())
 	.routes();
-};

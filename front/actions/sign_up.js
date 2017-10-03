@@ -12,7 +12,10 @@ export const signUp = (user, password) => (async () => {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded"
 			},
-			body: stringify({user, password})
+			body: stringify({
+				user,
+				password
+			})
 		})).json();
 		if(code){
 			return {

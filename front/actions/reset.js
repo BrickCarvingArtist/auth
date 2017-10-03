@@ -88,7 +88,10 @@ export const reset = (user, password, sso_token, referer = default_referer) => (
 				"Content-Type": "application/x-www-form-urlencoded",
 				Authorization: `Bearer ${sso_token}`
 			},
-			body: stringify({user, password})
+			body: stringify({
+				user,
+				password
+			})
 		})).json();
 		if(code){
 			return {
