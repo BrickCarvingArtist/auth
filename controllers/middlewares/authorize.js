@@ -36,5 +36,5 @@ export default () => async (ctx, next) => {
 			e
 		});
 	}
-	next();
+	return next();
 };

@@ -19,8 +19,10 @@ export default class Behavior extends Component{
 		} = this.props;
 		setTitle("行为检验 | Punchy");
 		setHeaderLeftButton("back");
-		const {sso_token} = parse(location.search.slice(1));
-		sso_token && this.props.dispatch(await setUserByToken(sso_token));
+		try{
+			const {sso_token} = parse(location.search.slice(1));
+			sso_token && this.props.dispatch(await setUserByToken(sso_token));
+		}catch(e){0}
 		this.fetch();
 	}
 	async fetch(){

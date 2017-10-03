@@ -17,6 +17,7 @@
 * Proxy server: `Nginx ^1.12`
 * Database: `MySQL ^5.7`
 * Static resource: `AliOSS`
+* Lint: `ESLint ^4`
 * Test(todo): `Mocha ^3`
 
 ## UI standard

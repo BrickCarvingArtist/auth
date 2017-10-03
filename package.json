@@ -5,7 +5,6 @@
   "main": "app.js",
   "repository": "https://github.com/BrickCarvingArtist/auth.git",
   "scripts": {
-    "prestart": "npm run eslint",
     "start": "node server.js",
     "build:develop": "npm install",
     "build:product": "npm install --production",
@@ -53,12 +52,11 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
-    "sequelize": "^4.6.0"
+    "sequelize": "^4.13.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
-    "eslint": "^4.8.0",
-    "webpack": "^3.5.5"
+    "eslint": "^4.8.0"
   },
   "private": true
 }

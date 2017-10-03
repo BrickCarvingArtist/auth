@@ -1,6 +1,6 @@
 import Router from "koa-router";
 import body from "koa-bodyparser";
-import {crossDomain, authorize} from "./middlewares";
+import {authorize} from "./middlewares";
 import validate from "./middlewares/validate";
 import signIn from "./sign_in";
 import check from "./sign_in/check";
@@ -17,7 +17,6 @@ import out from "./out";
 export default sequelize => new Router({
 	prefix: "/api"
 })
-	.use(crossDomain("http://localhost:4501"))
 	// 登录接口
 	.post("/in", body(), validate({
 		body: [
