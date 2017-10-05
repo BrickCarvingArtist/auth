@@ -1,3 +1,4 @@
+import {URL} from "url";
 import {compare, hash, verify} from "bcrypt";
 import {sign} from "jsonwebtoken";
 import {sequelize, User, UserInfo} from "./";
