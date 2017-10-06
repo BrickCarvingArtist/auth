@@ -1,12 +1,11 @@
 import {stringify} from "querystring";
-export const setMessage = value => ({
-	type: "DIALOG_MESSAGE",
-	value
-});
 export const basis = {
-	setMessage,
 	setTitle: value => ({
 		type: "PAGE_TITLE",
+		value
+	}),
+	setHeaderType: (value = 0) => ({
+		type: "HEADER_TYPE",
 		value
 	}),
 	setHeaderLeftButton: (value = {}) => ({
