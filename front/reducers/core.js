@@ -6,11 +6,6 @@ export default (state = {}, {type, value}) => {
 			...state,
 			title: value
 		};
-	case "DIALOG_MESSAGE":
-		return {
-			...state,
-			message: value
-		};
 	case "HEADER_LEFT_BUTTON":
 		return {
 			...state,
@@ -20,6 +15,13 @@ export default (state = {}, {type, value}) => {
 		return {
 			...state,
 			headerRightButton: value
+		};
+	case "HEADER_TYPE":
+		return {
+			...state,
+			headerLeftButton: {},
+			headerRightButton: {},
+			headerType: value
 		};
 	case "FOOTER_TYPE":
 		return {

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {alert} from "../components/Dialog";
 import {basis} from "../actions";
 import {reset} from "../actions/reset";
 import {parse} from "querystring";
@@ -12,7 +13,7 @@ import {parse} from "querystring";
 }, dispatch))
 @connect()
 export default class Reset extends Component{
-	componentWillMount(){
+	componentDidMount(){
 		const {
 			setTitle,
 			setHeaderLeftButton
@@ -23,7 +24,6 @@ export default class Reset extends Component{
 	render(){
 		const {
 			dispatch,
-			setMessage,
 			user,
 			sso_token
 		} = this.props;
@@ -38,15 +38,19 @@ export default class Reset extends Component{
 				<button type="button" className="center below_input blue" onClick={
 					async () => {
 						if(!ipt.checkValidity()){
-							return setMessage("重复密码长度需在6至16位内");
+							return alert("重复密码长度需在6至16位内");
 						}
-						const {
-							ok,
-							value
-						} = dispatch(await reset(user, ipt.value, sso_token, parse(location.search.slice(1)).referer));
-						if(ok){
-							setMessage("修改成功");
-							location.href = value;
+						try{
+							const {
+								ok,
+								value
+							} = dispatch(await reset(user, ipt.value, sso_token, parse(location.search.slice(1)).referer));
+							if(ok){
+								alert("修改成功");
+								location.href = value;
+							}
+						}catch(e){
+							alert(e);
 						}
 					}
 				}>确定</button>

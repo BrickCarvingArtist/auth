@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {push} from "react-router-redux";
+import {alert} from "../components/Dialog";
 import {basis} from "../actions";
 import {setUserByInput, setSignType} from "../actions/home";
 @connect(({home}) => ({
@@ -13,15 +15,15 @@ import {setUserByInput, setSignType} from "../actions/home";
 export default class Home extends Component{
 	componentWillMount(){
 		const {
-			setTitle
+			setTitle,
+			setHeaderType
 		} = this.props;
 		setTitle("首页 | Punchy");
+		setHeaderType();
 	}
 	render(){
 		const {
 			dispatch,
-			history,
-			setMessage,
 			setSignType,
 			user
 		} = this.props;
@@ -36,12 +38,12 @@ export default class Home extends Component{
 				<button type="button" className="center below_input blue" onClick={
 					async () => {
 						if(!ipt.checkValidity()){
-							return setMessage("要11位数字才能组合成一个有效的手机号码哦");
+							return alert("要11位数字才能组合成一个有效的手机号码哦");
 						}
 						const {hasSigned} = dispatch(await setUserByInput(ipt.value));
-						hasSigned || setMessage("该手机号还未注册，再设置密码就注册好了");
+						hasSigned || alert("该手机号还未注册，再设置密码就注册好了");
 						setSignType(hasSigned || 0);
-						history.push(`/distributor${location.search}`);
+						dispatch(push(`/distributor${location.search}`));
 					}
 				}>继续</button>
 			</form>

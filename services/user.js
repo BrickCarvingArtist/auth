@@ -66,7 +66,7 @@ export const signUp = async ({tel, password}) => {
 	}
 };
 export const verifyToken = sso_token => verify(sso_token, TOKEN_SECRET).tel;
-export const getBehavior = tel => sequelize.query(`SELECT id, title FROM articles RIGHT JOIN (SELECT * FROM (SELECT article_id FROM article_views WHERE user_id IS NULL OR user_id<>${tel} GROUP BY article_id ORDER BY rand() LIMIT 9)t1 UNION SELECT article_id FROM article_views WHERE user_id=${tel} ORDER BY RAND())t2 ON articles.id=t2.article_id;`, {
+export const getBehavior = tel => sequelize.query(`SELECT id, title FROM articles RIGHT JOIN (SELECT * FROM (SELECT article_id FROM article_views WHERE user_id IS NULL OR user_id<>${tel} GROUP BY article_id ORDER BY rand() LIMIT 9)t1 UNION SELECT article_id FROM article_views WHERE user_id=${tel} ORDER BY RAND())t2 ON articles.id=t2.article_id LIMIT 10;`, {
 	type: sequelize.QueryTypes.SELECT
 });
 export const match = async ({tel, article_id}) => {

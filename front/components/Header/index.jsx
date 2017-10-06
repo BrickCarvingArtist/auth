@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import classNames from "classnames";
 try{
-	require("../styles/header");
+	require("./header");
 }catch(e){}
 const LEVELS = ["normal", "blue", "red"];
 const Button = ({icon, label, to, onClick = function(){}, level = 0}) => {
@@ -34,18 +33,20 @@ const Button = ({icon, label, to, onClick = function(){}, level = 0}) => {
 	return <icon></icon>;
 };
 @withRouter
-@connect(({core}) => ({
-	title: core.title,
-	headerLeftButton: core.headerLeftButton,
-	headerRightButton: core.headerRightButton
-}))
 export default class Header extends Component{
+	static defaultProps = {
+		headerType: 1
+	};
 	render(){
 		const {
 			history,
-			headerRightButton
+			headerRightButton,
+			headerType,
+			title
 		} = this.props;
-		let {headerLeftButton} = this.props;
+		let {
+			headerLeftButton
+		} = this.props;
 		headerLeftButton === "back" && (headerLeftButton = {
 			icon: "medium back",
 			onClick(){
@@ -53,11 +54,15 @@ export default class Header extends Component{
 			}
 		});
 		return (
-			<header>
+			<header className={
+				classNames({
+					hidden: !(headerType || Reflect.ownKeys(headerLeftButton).length || Reflect.ownKeys(headerRightButton).length)
+				})
+			}>
 				<Button {...headerLeftButton} />
-				<strong>{this.props.title}</strong>
+				<strong>{title}</strong>
 				<Button {...headerRightButton} />
 			</header>
 		);
 	}
-};
+}

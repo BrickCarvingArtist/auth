@@ -1,2 +1,2 @@
-export const server_name = "https://auth.ikindness.cn";
-export const default_referer = "https://punchy.ikindness.cn";
+export const SERVER_NAME = "https://auth.ikindness.cn";
+export const DEFAULT_REFERER = "https://punchy.ikindness.cn";

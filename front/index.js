@@ -1,5 +1,5 @@
 import React from "react";
-import {render} from "react-dom";
+import {hydrate} from "react-dom";
 import createHistory from "history/createBrowserHistory";
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
@@ -16,7 +16,7 @@ store.subscribe(() => {
 	localStorage.ik_auth = JSON.stringify(store.getState());
 	console.log(store.getState());
 });
-render(
+hydrate(
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
 			<App />

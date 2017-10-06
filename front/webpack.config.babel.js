@@ -22,7 +22,8 @@ const getCoreConfig = () => ({
 			{
 				test: /\.styl$/,
 				include: [
-					resolve(__dirname, "./styles")
+					resolve(__dirname, "./styles"),
+					resolve(__dirname, "./components")
 				],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",

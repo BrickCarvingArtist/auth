@@ -31,14 +31,8 @@ export const routes = [
 		title: "修改密码"
 	}
 ];
-export default withRouter(connect()(({match}) => (
-	<main>
-		{
-			match.path == "/" && match.isExact ? null : <Header />
-		}
-		{
-			routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
-		}
-		<Dialog />
-	</main>
-)));
+export default withRouter(connect(({core}) => core)(({title, headerLeftButton, headerRightButton, headerType}) => [
+	<Header title={title} headerLeftButton={headerLeftButton} headerRightButton={headerRightButton} headerType={headerType} />,
+	routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />),
+	<Dialog />
+]));

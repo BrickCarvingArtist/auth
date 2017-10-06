@@ -3,20 +3,18 @@
 @import "./mixin"
 body
 	position fixed
-main
+#app
 	position relative
 	width w(375)
 	height h(647)
 	overflow hidden
-	background-color #f3f3f3
 .page
-	overflow-y scroll
-	&.with-both
-		height h(647)
+	&:not(.with-both)
+		margin-top h(45)
 	&.with-footer
-		height h(602)
+		min-height h(622)
 	&.without-footer
-		height h(552)
+		margin-bottom h(50)
 form
 	display flex
 	flex-direction column

@@ -31,9 +31,9 @@ const writeErrorLog = async (ctx, code, message, e = "未定义错误对象") =>
 			const {
 				method,
 				path,
-				ip
+				headers
 			} = ctx;
-			m = `${method} | ${path} | ${ip} | `;
+			m = `${method} | ${path} | ${headers["x-forwarded-for"]} | `;
 		}
 		await appendFile(resolve(__dirname, `../logs/error/${y}${mon}${d}.log`), `${"-".repeat(10)} | ${m}${y}-${mon}-${d} ${h}:${min}:${s} | ${"-".repeat(10)}\n${code} - ${message} - ${e}\n`, "utf-8");
 	}catch(err){

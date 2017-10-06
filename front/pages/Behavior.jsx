@@ -1,18 +1,18 @@
 import React, {Component} from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {push} from "react-router-redux";
+import {parse} from "querystring";
+import {alert} from "../components/Dialog";
 import {basis} from "../actions";
 import {setUserByToken, getBehavior, match} from "../actions/reset";
-import {parse} from "querystring";
 @connect(({home}) => ({
 	user: home.user,
 	behavior: home.behavior
-}), dispatch => bindActionCreators({
-	...basis
-}, dispatch))
+}), dispatch => bindActionCreators(basis, dispatch))
 @connect()
 export default class Behavior extends Component{
-	async componentWillMount(){
+	async componentDidMount(){
 		const {
 			setTitle,
 			setHeaderLeftButton
@@ -22,41 +22,46 @@ export default class Behavior extends Component{
 		try{
 			const {sso_token} = parse(location.search.slice(1));
 			sso_token && this.props.dispatch(await setUserByToken(sso_token));
-		}catch(e){0}
+		}catch(e){
+			alert(e);
+		}
 		this.fetch();
 	}
 	async fetch(){
-		const {
-			dispatch,
-			setMessage,
-			user
-		} = this.props;
-		dispatch(await getBehavior(user));
+		try{
+			const {
+				dispatch,
+				user
+			} = this.props;
+			dispatch(await getBehavior(user));
+		}catch(e){
+			alert(e);
+		}
+	}
+	async matchBehavior(id){
+		try{
+			const {
+				dispatch,
+				user
+			} = this.props;
+			const {ok} = dispatch(await match(user, id));
+			if(ok){
+				alert("行为检验成功");
+				return dispatch(push(`/reset${location.search}`));
+			}
+		}catch(e){
+			alert(e);
+		}
+		this.fetch();
 	}
 	render(){
-		const {
-			dispatch,
-			setMessage,
-			history,
-			user,
-			behavior
-		} = this.props;
 		return (
 			<form className="page behavior with-footer">
 				<label>以下哪篇文章是您最近阅读过的？</label>
 				<fieldset>
 					{
-						behavior.map(({id, title}, i) => (
-							<section key={i} onClick={
-								async () => {
-									const {ok} = dispatch(await match(user, id));
-									if(ok){
-										setMessage("行为检验成功");
-										return history.push(`/reset${location.search}`);
-									}
-									this.fetch();
-								}
-							}>{title}</section>
+						this.props.behavior.map(({id, title}, i) => (
+							<section key={i} onClick={this.matchBehavior.bind(this, id)}>{title}</section>
 						))
 					}
 				</fieldset>
