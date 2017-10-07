@@ -6,8 +6,8 @@
   "repository": "https://github.com/BrickCarvingArtist/auth.git",
   "scripts": {
     "start": "node server.js",
-    "build:develop": "npm install",
-    "build:product": "npm install --production",
+    "build:develop": "yarn install",
+    "build:product": "yarn install --production",
     "eslint": "./node_modules/.bin/eslint ./",
     "test": "./node_modules/.bin/mocha"
   },

@@ -32,8 +32,7 @@ const Button = ({icon, label, to, onClick = function(){}, level = 0}) => {
 	}
 	return <icon></icon>;
 };
-@withRouter
-export default class Header extends Component{
+export class Header extends Component{
 	static defaultProps = {
 		headerType: 1
 	};
@@ -48,7 +47,7 @@ export default class Header extends Component{
 			headerLeftButton
 		} = this.props;
 		headerLeftButton === "back" && (headerLeftButton = {
-			icon: "medium back",
+			icon: "back",
 			onClick(){
 				history.goBack();
 			}
@@ -66,3 +65,4 @@ export default class Header extends Component{
 		);
 	}
 }
+export default withRouter(Header);
