@@ -23,11 +23,6 @@ export default (state = {}, {type, value}) => {
 			headerRightButton: {},
 			headerType: value
 		};
-	case "FOOTER_TYPE":
-		return {
-			...state,
-			footerType: value
-		};
 	default:
 		return state;
 	}

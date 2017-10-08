@@ -15,9 +15,5 @@ export const basis = {
 	setHeaderRightButton: (value = {}) => ({
 		type: "HEADER_RIGHT_BUTTON",
 		value
-	}),
-	setFooterType: value => ({
-		type: "FOOTER_TYPE",
-		value
 	})
 };
