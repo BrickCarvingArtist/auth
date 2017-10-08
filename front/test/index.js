@@ -6,5 +6,5 @@ import headerTest from "./components/header";
 Enzyme.configure({
 	adapter: new Adapter
 });
-// dialogTest();
+dialogTest();
 headerTest();
