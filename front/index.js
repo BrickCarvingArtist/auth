@@ -5,17 +5,8 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import {ConnectedRouter, routerReducer, routerMiddleware} from "react-router-redux";
 import reducers from "./reducers";
+import {history, store} from "./store";
 import App from "./App";
-import "./styles";
-const history = createHistory();
-const store = createStore(combineReducers({
-	...reducers,
-	router: routerReducer
-}), JSON.parse(localStorage.ik_auth || "{}"), applyMiddleware(routerMiddleware(history)));
-store.subscribe(() => {
-	localStorage.ik_auth = JSON.stringify(store.getState());
-	console.log(store.getState());
-});
 hydrate(
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
