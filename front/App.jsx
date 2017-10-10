@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Distributor from "./pages/Distributor";
 import Behavior from "./pages/Behavior";
 import Reset from "./pages/Reset";
-import {RouteWithSubRoutes} from "./utils";
+import {RouteWithSubRoutes, attachStyles} from "./utils";
 export const routes = [
 	{
 		path: "/",
@@ -31,8 +31,8 @@ export const routes = [
 		title: "修改密码"
 	}
 ];
-export default withRouter(connect(({core}) => core)(({title, headerLeftButton, headerRightButton, headerType}) => [
+export default attachStyles(() => require("./styles"))(withRouter(connect(({core}) => core)(({title, headerLeftButton, headerRightButton, headerType}) => [
 	<Header title={title} headerLeftButton={headerLeftButton} headerRightButton={headerRightButton} headerType={headerType} />,
 	routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />),
 	<Dialog />
-]));
+])));

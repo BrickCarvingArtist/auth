@@ -9,16 +9,16 @@ import {setUserByInput, setSignType} from "../actions/home";
 	user: home.user
 }), dispatch => bindActionCreators({
 	...basis,
-	setSignType
+	setSignType,
+	dispatch
 }, dispatch))
-@connect()
 export default class Home extends Component{
-	componentWillMount(){
+	componentDidMount(){
 		const {
 			setTitle,
 			setHeaderType
 		} = this.props;
-		setTitle("首页 | Punchy");
+		setTitle("用户中心 | iKindness");
 		setHeaderType();
 	}
 	render(){

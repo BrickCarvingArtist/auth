@@ -9,7 +9,10 @@ import {setUserByToken, getBehavior, match} from "../actions/reset";
 @connect(({home}) => ({
 	user: home.user,
 	behavior: home.behavior
-}), dispatch => bindActionCreators(basis, dispatch))
+}), dispatch => bindActionCreators({
+	...basis,
+	dispatch
+}, dispatch))
 @connect()
 export default class Behavior extends Component{
 	async componentDidMount(){

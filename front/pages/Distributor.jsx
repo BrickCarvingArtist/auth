@@ -10,8 +10,10 @@ import {parse} from "querystring";
 @connect(({home}) => ({
 	user: home.user,
 	signType: home.signType
-}), dispatch => bindActionCreators(basis, dispatch))
-@connect()
+}), dispatch => bindActionCreators({
+	...basis,
+	dispatch
+}, dispatch))
 export default class Distributor extends Component{
 	componentDidMount(){
 		const {

@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import {Link, withRouter} from "react-router-dom";
 import classNames from "classnames";
-try{
-	require("./header");
-}catch(e){}
+import {attachStyles} from "../utils";
 const LEVELS = ["normal", "blue", "red"];
 const Button = ({icon, label, to, onClick = function(){}, level = 0}) => {
 	if(icon){
@@ -32,26 +30,16 @@ const Button = ({icon, label, to, onClick = function(){}, level = 0}) => {
 	}
 	return <icon></icon>;
 };
+@attachStyles(() => require("./header"))
 export class Header extends Component{
-	static defaultProps = {
-		headerType: 1
-	};
 	render(){
 		const {
 			history,
+			headerLeftButton,
 			headerRightButton,
 			headerType,
 			title
 		} = this.props;
-		let {
-			headerLeftButton
-		} = this.props;
-		headerLeftButton === "back" && (headerLeftButton = {
-			icon: "back",
-			onClick(){
-				history.goBack();
-			}
-		});
 		return (
 			<header className={
 				classNames({

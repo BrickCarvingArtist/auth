@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import classNames from "classnames";
-import {delay} from "../../utils";
-try{
-	require("./dialog");
-}catch(e){}
+import {attachStyles, delay} from "../utils";
+@attachStyles(() => require("./dialog"))
 export default class Dialog extends Component{
 	state = {
 		message: "",

@@ -9,9 +9,9 @@ import {parse} from "querystring";
 	user: home.user,
 	sso_token: home.sso_token
 }), dispatch => bindActionCreators({
-	...basis
+	...basis,
+	dispatch
 }, dispatch))
-@connect()
 export default class Reset extends Component{
 	componentDidMount(){
 		const {

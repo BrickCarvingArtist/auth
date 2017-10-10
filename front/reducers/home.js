@@ -1,5 +1,6 @@
 export default (state = {
-	behavior: []
+	behavior: [],
+	signType: 0
 }, {type, value}) => ({
 	USER: {
 		...state,
