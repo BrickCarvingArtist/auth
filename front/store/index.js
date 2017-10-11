@@ -18,6 +18,7 @@ export const store = configureStore({
 		for(let i in localStorage){
 			storage[i.replace("ik_auth_", "")] = parseJSONString(localStorage[i])
 		}
+		delete storage.core;
 		return storage;
 	})({}),
 	enhancers: [
@@ -29,5 +30,6 @@ store.subscribe(() => {
 	for(let i in states){
 		localStorage[`ik_auth_${i}`] = JSON.stringify(states[i]);
 	}
+	console.log(states)
 	process.env.NODE_ENV !== "production" && console.log(states);
 });

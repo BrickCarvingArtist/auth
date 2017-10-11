@@ -13,13 +13,11 @@ import {parse} from "querystring";
 	dispatch
 }, dispatch))
 export default class Reset extends Component{
+	componentWillMount(){
+		this.props.setTitle("修改密码 | iKindness");
+	}
 	componentDidMount(){
-		const {
-			setTitle,
-			setHeaderLeftButton
-		} = this.props;
-		setTitle("修改密码 | Punchy");
-		setHeaderLeftButton("back");
+		this.props.setHeaderLeftButton("back");
 	}
 	render(){
 		const {

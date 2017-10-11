@@ -15,13 +15,11 @@ import {parse} from "querystring";
 	dispatch
 }, dispatch))
 export default class Distributor extends Component{
+	componentWillMount(){
+		this.props.setTitle(`${this.getTitleName()} | iKindness`);
+	}
 	componentDidMount(){
-		const {
-			setTitle,
-			setHeaderLeftButton
-		} = this.props;
-		setTitle(`${this.getTitleName()} | Punchy`);
-		setHeaderLeftButton("back");
+		this.props.setHeaderLeftButton("back");
 	}
 	getTitleName(){
 		return ["注册", "登录"][this.props.signType];

@@ -15,13 +15,11 @@ import {setUserByToken, getBehavior, match} from "../actions/reset";
 }, dispatch))
 @connect()
 export default class Behavior extends Component{
+	componentWillMount(){
+		this.props.setTitle("行为检验 | iKindness");
+	}
 	async componentDidMount(){
-		const {
-			setTitle,
-			setHeaderLeftButton
-		} = this.props;
-		setTitle("行为检验 | Punchy");
-		setHeaderLeftButton("back");
+		this.props.setHeaderLeftButton("back");
 		try{
 			const {sso_token} = parse(location.search.slice(1));
 			sso_token && this.props.dispatch(await setUserByToken(sso_token));

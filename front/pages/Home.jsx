@@ -13,13 +13,11 @@ import {setUserByInput, setSignType} from "../actions/home";
 	dispatch
 }, dispatch))
 export default class Home extends Component{
+	componentWillMount(){
+		this.props.setTitle("用户中心 | iKindness");
+	}
 	componentDidMount(){
-		const {
-			setTitle,
-			setHeaderType
-		} = this.props;
-		setTitle("用户中心 | iKindness");
-		setHeaderType();
+		this.props.setHeaderType();
 	}
 	render(){
 		const {
