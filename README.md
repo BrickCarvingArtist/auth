@@ -4,7 +4,7 @@
 * UI(todo): `Sketch`
 * JavaScript: `ECMAScript *`
 * Main front side frameworks:
-	1. `React ^15`
+	1. `React ^16`
 	2. `React-Router ^4`
 	3. `Redux ^3`
 	4. `React-Redux`
@@ -14,11 +14,11 @@
 	1. `Node.js ^8`
 	2. `Koa ^2`
 	3. `Sequelize ^4`
-* Proxy server: `Nginx ^1.12`
+* Proxy server: `Nginx ^1.13`
 * Database: `MySQL ^5.7`
 * Static resource: `AliOSS`
 * Lint: `ESLint ^4`
-* Test(todo): `Mocha ^3`
+* Test(doing): `Mocha ^3`
 
 ## UI standard
 
