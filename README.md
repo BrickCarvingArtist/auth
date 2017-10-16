@@ -46,8 +46,16 @@ yarn git:add
 
 * start a production server
 
+1. as a temporary server
+
 ```sh
 yarn start:pro
+```
+
+2. as an online server
+
+```sh
+pm2 --name auth start yarn -- start:pro
 ```
 
 * build for production
