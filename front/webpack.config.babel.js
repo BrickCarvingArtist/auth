@@ -92,6 +92,18 @@ if(NODE_ENV === "production"){
 		path: resolve(__dirname, "../../statics/auth"),
 		publicPath: "/auth/"
 	});
+	config.module.rules[1].use = ExtractTextPlugin.extract({
+		fallback: "style-loader",
+		use: [
+			{
+				loader: "css-loader",
+				options: {
+					minimize: true
+				}
+			},
+			"stylus-loader"
+		]
+	});
 	config.plugins.push(new webpack.DefinePlugin({
 		process: {
 			env: {
