@@ -15,9 +15,9 @@ export const store = configureStore({
 		router: routerReducer
 	},
 	initialState: ((storage) => {
-		for(let i in localStorage){
-			storage[i.replace("ik_auth_", "")] = parseJSONString(localStorage[i])
-		}
+		Reflect.ownKeys(localStorage).forEach(key => {
+			storage[key.replace("ik_auth_", "")] = parseJSONString(localStorage[key])
+		});
 		delete storage.core;
 		return storage;
 	})({}),
@@ -30,6 +30,6 @@ store.subscribe(() => {
 	for(let i in states){
 		localStorage[`ik_auth_${i}`] = JSON.stringify(states[i]);
 	}
-	console.log(states)
+	console.log(states);
 	process.env.NODE_ENV !== "production" && console.log(states);
 });

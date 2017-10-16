@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "the front side of https://auth.ikindness.cn",
   "scripts": {
-    "serve": "webpack-dev-server --config webpack.config.babel.js",
-    "build": "webpack --config webpack.config.babel.js -w",
+    "build:dev": "export NODE_ENV=development && webpack --config webpack.config.babel.js",
+    "build:pro": "export NODE_ENV=production && webpack --config webpack.config.babel.js",
     "test": "./node_modules/.bin/mocha --require babel-core/register"
   },
   "author": "BrickCarvingArtist",
@@ -50,7 +50,7 @@
     "style-loader": "^0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.2"
   }
 }

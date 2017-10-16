@@ -1,38 +1,42 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import {Switch, withRouter} from "react-router-dom";
 import Header from "./components/Header";
 import Dialog from "./components/Dialog";
 import Home from "./pages/Home";
 import Distributor from "./pages/Distributor";
 import Behavior from "./pages/Behavior";
 import Reset from "./pages/Reset";
+import NotFound from "./pages/NotFound";
 import {RouteWithSubRoutes, attachStyles} from "./utils";
 export const routes = [
 	{
 		path: "/",
 		exact: true,
-		component: Home,
-		title: "首页 | Punchy"
+		component: Home
 	},
 	{
 		path: "/distributor",
-		component: Distributor,
-		title: "加入 | Punchy"
+		component: Distributor
 	},
 	{
 		path: "/behavior",
-		component: Behavior,
-		title: "行为检验"
+		component: Behavior
 	},
 	{
 		path: "/reset",
-		component: Reset,
-		title: "修改密码"
+		component: Reset
+	},
+	{
+		component: NotFound
 	}
 ];
 export default attachStyles(() => require("./styles"))(withRouter(connect(({core}) => core)(({title, headerLeftButton, headerRightButton, headerType}) => [
-	<Header title={title} headerLeftButton={headerLeftButton} headerRightButton={headerRightButton} headerType={headerType} />,
-	routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />),
-	<Dialog />
+	<Header key={0} title={title} headerLeftButton={headerLeftButton} headerRightButton={headerRightButton} headerType={headerType} />,
+	<Switch key={1}>
+		{
+			routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)
+		}
+	</Switch>,
+	<Dialog key={2} />
 ])));
