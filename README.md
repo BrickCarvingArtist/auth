@@ -20,6 +20,42 @@
 * Lint: `ESLint ^4`
 * Test(doing): `Mocha ^3`
 
+## Workflow
+
+### Development
+
+* start a development server
+
+```sh
+yarn start:dev
+```
+
+* start webpack
+
+```sh
+cd ./front && yarn run build:dev
+```
+
+* git adding
+
+```sh
+yarn git:add
+```
+
+### production
+
+* start a production server
+
+```sh
+yarn start:pro
+```
+
+* build for production
+
+```sh
+cd ./front && yarn run build:pro
+```
+
 ## UI standard
 
 ### icons
