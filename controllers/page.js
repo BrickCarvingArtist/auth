@@ -35,30 +35,20 @@ export default () => async (ctx, next) => {
 	const {path} = ctx;
 	try{
 		await fetchBranchData(store, path);
-		const context = {};
-		const html = ReactDOMServer.renderToString(
-			<Provider store={store}>
-				<StaticRouter
-					location={path}
-					context={context}
-				>
-					<App />
-				</StaticRouter>
-			</Provider>
-		);
-		const {title} = store.getState().core;
-		try{
-			ctx.body = (await readFile(resolve(__dirname, "../views/template.html"), "utf-8"))
-				.replace(/<link rel="stylesheet" \/>/, pageCss)
-				.replace(/(<title>)(<\/title>)/, `$1${title}$2`)
-				.replace(/(<div id="app">)(<\/div>)/, `$1${html}$2${pageJs}`);
-		}catch(e){
-			ctx.body = error({
-				code: 5009900001,
-				ctx,
-				e
-			});
-		}
+	}catch(e){}
+	const html = ReactDOMServer.renderToString(
+		<Provider store={store}>
+			<StaticRouter location={path} context={{}}>
+				<App />
+			</StaticRouter>
+		</Provider>
+	);
+	const {title} = store.getState().core;
+	try{
+		ctx.body = (await readFile(resolve(__dirname, "../views/template.html"), "utf-8"))
+			.replace(/<link rel="stylesheet" \/>/, pageCss)
+			.replace(/(<title>)(<\/title>)/, `$1${title}$2`)
+			.replace(/(<div id="app">)(<\/div>)/, `$1${html}$2${pageJs}`);
 	}catch(e){
 		ctx.body = error({
 			code: 5009900000,
