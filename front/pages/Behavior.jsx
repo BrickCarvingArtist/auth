@@ -11,6 +11,7 @@ import {setUserByToken, getBehavior, match} from "../actions/reset";
 	behavior: home.behavior
 }), dispatch => bindActionCreators({
 	...basis,
+	push,
 	dispatch
 }, dispatch))
 @connect()
@@ -48,7 +49,7 @@ export default class Behavior extends Component{
 			const {ok} = dispatch(await match(user, id));
 			if(ok){
 				alert("行为检验成功");
-				return dispatch(push(`/reset${location.search}`));
+				return push(`/reset${location.search}`);
 			}
 		}catch(e){
 			alert(e);

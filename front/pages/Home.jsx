@@ -10,6 +10,7 @@ import {setUserByInput, setSignType} from "../actions/home";
 }), dispatch => bindActionCreators({
 	...basis,
 	setSignType,
+	push,
 	dispatch
 }, dispatch))
 export default class Home extends Component{
@@ -41,7 +42,7 @@ export default class Home extends Component{
 						const {hasSigned} = dispatch(await setUserByInput(ipt.value));
 						hasSigned || alert("该手机号还未注册，再设置密码就注册好了");
 						setSignType(hasSigned || 0);
-						dispatch(push(`/distributor${location.search}`));
+						push(`/distributor${location.search}`);
 					}
 				}>继续</button>
 			</form>
