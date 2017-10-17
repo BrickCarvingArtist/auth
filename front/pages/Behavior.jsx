@@ -44,6 +44,7 @@ export default class Behavior extends Component{
 		try{
 			const {
 				dispatch,
+				push,
 				user
 			} = this.props;
 			const {ok} = dispatch(await match(user, id));

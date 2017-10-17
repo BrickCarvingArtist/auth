@@ -24,6 +24,7 @@ export default class Home extends Component{
 		const {
 			dispatch,
 			setSignType,
+			push,
 			user
 		} = this.props;
 		let ipt;
